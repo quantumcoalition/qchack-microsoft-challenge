@@ -21,7 +21,8 @@ namespace QCHack.Task1 {
     // will be 1/√3|001⟩ ⊗ |1⟩ + 1/√3|100⟩ ⊗ |0⟩ + 1/√3|111⟩ ⊗ |0⟩.
     //
     operation Task1_DivisibleByFour (inputs : Qubit[], output : Qubit) : Unit is Adj+Ctl {
-        // ...
+        let Modulo4 = ControlledOnBitString([false, false], X);
+        Modulo4(inputs, output);
     }
 }
 
