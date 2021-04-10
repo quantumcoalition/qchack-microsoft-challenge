@@ -18,8 +18,33 @@ namespace QCHack.Task2 {
     // For example, the result of applying the operation to state (|001⟩ + |110⟩ + |111⟩)/√3 ⊗ |0⟩
     // will be 1/√3|001⟩ ⊗ |1⟩ + 1/√3|110⟩ ⊗ |1⟩ + 1/√3|111⟩ ⊗ |0⟩.
     //
+
+    operation CCCNOT (ctrl: Qubit[], ancilla: Qubit[], output: Qubit) : Unit is Adj+Ctl {
+        CCNOT(ctrl[0],ctrl[1],ancilla[0]);
+        CCNOT(ctrl[1],ctrl[2],ancilla[1]);
+        CCNOT(ancilla[0],ancilla[1],output);
+        CCNOT(ctrl[1],ctrl[2],ancilla[1]);
+        CCNOT(ctrl[0],ctrl[1],ancilla[0]);
+    }
+
     operation Task2_ValidTriangle (inputs : Qubit[], output : Qubit) : Unit is Adj+Ctl {
-        // ...
+        // two cases: all 0s or all 1s: return 1
+        // any other case: return 0
+        use ancilla = Qubit[2];
+        CCCNOT(inputs, ancilla, output);
+
+        for i in 0 .. 2 {
+            X(inputs[i]);
+        }
+        
+        CCCNOT(inputs, ancilla, output);
+
+        for i in 0 .. 2 {
+            X(inputs[i]);
+        }
+
+        X(output);        
+        
     }
 }
 
