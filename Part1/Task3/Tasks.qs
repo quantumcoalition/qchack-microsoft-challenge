@@ -23,8 +23,37 @@ namespace QCHack.Task3 {
     // Warning: some library operations, such as ApplyToEach, might count as multi-qubit gate,
     // even though they apply single-qubit gates to separate qubits. Make sure you run the test
     // on your solution to check that it passes before you submit the solution!
+
     operation Task3_ValidTriangle (inputs : Qubit[], output : Qubit) : Unit is Adj+Ctl {
-        // ...
+        // two cases: all 0s or all 1s: return 1
+        // any other case: return 0
+        use ancilla = Qubit[2];
+
+        //Check if two first qbits are the same:
+        CNOT(inputs[0],ancilla[0]);
+        CNOT(inputs[1],ancilla[0]);
+        X(ancilla[0]);
+        //Check if two last qbits are the same:
+        CNOT(inputs[1],ancilla[1]);
+        CNOT(inputs[2],ancilla[1]);
+        X(ancilla[1]);
+
+        // If all are indeed the same, then flip output
+        CCNOT(ancilla[0],ancilla[1],output);
+
+        //Reverse first operation
+        CNOT(inputs[1],ancilla[1]);
+        CNOT(inputs[2],ancilla[1]);
+        X(ancilla[1]);
+
+        //Reverse second operation
+        CNOT(inputs[0],ancilla[0]);
+        CNOT(inputs[1],ancilla[0]);
+        X(ancilla[0]);
+
+        // Flip output again to match the expected format
+        X(output);
+
     }
 }
 
