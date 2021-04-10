@@ -106,4 +106,4 @@ We also recommend you to install the [Quantum Katas](https://github.com/Microsof
 This page lists Microsoft additional unique rules for its Challenge, including judging criteria, submission guidelines, eligibility and prizes. Please refer to the [Official QCHack Hacking Rules 2021](https://docs.google.com/document/d/1_Jln3lIfNmYPlUtJ17zgwi5FQtNtzhHR-fH15QqW3xc/edit) for general QCHack rules.
 
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/tcNickolas/qchack-challenge-draft/main)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/quantumcoalition/qchack-microsoft-challenge/main)
