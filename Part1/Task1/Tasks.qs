@@ -21,7 +21,13 @@ namespace QCHack.Task1 {
     // will be 1/√3|001⟩ ⊗ |1⟩ + 1/√3|100⟩ ⊗ |0⟩ + 1/√3|111⟩ ⊗ |0⟩.
     //
     operation Task1_DivisibleByFour (inputs : Qubit[], output : Qubit) : Unit is Adj+Ctl {
-        // ...
+        X(inputs[0]);
+        X(inputs[1]);
+        CCNOT(inputs[0],inputs[1],output);
+        X(inputs[0]);
+        X(inputs[1]);
+
     }
+
 }
 
