@@ -37,13 +37,68 @@ namespace QCHack.Task4 {
     // Hint: Remember that you can examine the inputs and the intermediary results of your computations
     //       using Message function for classical values and DumpMachine for quantum states.
     //
+    
+operation Task2_ValidTriangle (inputs : Qubit[], output : Qubit) : Unit is Adj+Ctl {
+        use a = Qubit[2];
+    CNOT(inputs[0],a[0]);
+    CNOT(inputs[1],a[0]);
+    
+    CNOT(inputs[1],a[1]);
+    CNOT(inputs[2],a[1]);
+    
+    CNOT(a[0],output);
+    CNOT(a[1],output);
+    CCNOT(a[0],a[1],output);
+    
+    // Resetting to 0
+    CNOT(inputs[2],a[1]);
+    CNOT(inputs[1],a[1]);
+
+    CNOT(inputs[1],a[0]);
+    CNOT(inputs[0],a[0]);
+    
+    X(output);
+    X(output);
+    }
+
+
     operation Task4_TriangleFreeColoringOracle (
         V : Int, 
         edges : (Int, Int)[], 
         colorsRegister : Qubit[], 
         target : Qubit
     ) : Unit is Adj+Ctl {
-        // ...
+        let nEdges = Length(edges);
+    let count = nEdges*(nEdges-1)*(nEdges-2)/6;
+    //Message($"Number of loops: {count}");        
+
+    use conflictQubits = Qubit[count];
+    within {
+        for i in 0..nEdges-3{
+            for j in i+1..nEdges-2{
+                for k in j+1..nEdges-1{
+                    let (a0,a1) = edges[i];
+                    let (b0,b1) = edges[j];
+                    let (c0,c1) = edges[k];
+                    //Message($"{edges[i]}-> {a0},{a1}|{edges[j]} -> {b0},{b1}|{edges[k]} -> {c0},{c1}");
+                    let colVec = [colorsRegister[i],colorsRegister[j],colorsRegister[k]];
+                    //Message($"Colours:{colVec}");
+                    
+                    //Message("State before applying the marking oracle:");
+                    //DumpMachine();
+
+                    Task2_ValidTriangle(colVec, conflictQubits[0]);
+
+                    // Print the resulting state; notice which amplitudes changed
+                    //Message("State after applying the marking oracle:");
+                    //DumpMachine();
+                }
+            }
+        }
+    } apply {
+         //If there are no conflicts (all qubits are in 0 state), the vertex coloring is valid.
+        (ControlledOnInt(0, X))(conflictQubits, target);
+    }
     }
 }
 
