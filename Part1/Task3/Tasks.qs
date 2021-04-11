@@ -36,13 +36,12 @@ namespace QCHack.Task3 {
     CCNOT(a[0],a[1],output);
     
     // Resetting to 0
-    CNOT(inputs[0],a[0]);
-    CNOT(inputs[1],a[0]);
-    
-    CNOT(inputs[1],a[1]);
     CNOT(inputs[2],a[1]);
+    CNOT(inputs[1],a[1]);
 
-    // I guess final output needs to be the last operation? 
+    CNOT(inputs[1],a[0]);
+    CNOT(inputs[0],a[0]);
+    
     X(output);
     X(output);
     }
