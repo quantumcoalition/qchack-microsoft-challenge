@@ -2,6 +2,8 @@
 Name: Rohitashwa Chakraborty / Discord: captain._nemo#5645
 Name: Abhimanyu Kumbhar / Discord: Abhimanyu#4610
 Name: Santanu Banerjee / Discord: santanubanerjee#3199
+Name: Noura Abdelhafez / Discord : Noura A#7154
+Name: / Discord: Nonsensicalinsane#5905
 
 
 
