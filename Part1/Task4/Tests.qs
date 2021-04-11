@@ -18,4 +18,11 @@ namespace QCHack.Task4 {
     operation Test4_ValidTriangle_Small() : Unit {
         TestingHarness_ValidTriangle_Small(Task4_TriangleFreeColoringOracle);
     }
+
+
+    // ------------------------------------------------------
+    @Test("Microsoft.Quantum.Katas.CounterSimulator")
+    operation Test4_ValidTriangle_Large() : Unit {
+        TestingHarness_ValidTriangle_Large(Task4_TriangleFreeColoringOracle);
+    }
 }
